@@ -1,6 +1,6 @@
 // COREZA ERP Logo and Icon Assets
-import LogoLight from './logo.png';
-import LogoDark from './logo1.png';
+import LogoLight from './Logo.png';
+import LogoDark from './Logo1.png';
 
 // Main COREZA logo variations
 export const corezaLogos = {
