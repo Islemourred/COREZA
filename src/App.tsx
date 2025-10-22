@@ -5,6 +5,8 @@ import { corezaLogos } from "./assets/logos";
 import { AnimatedStat } from "./components/AnimatedStat";
 import { AnimatedNumber } from "./components/AnimatedNumber";
 import { AnimatedChart } from "./components/AnimatedChart";
+import infinityLogo from "./assets/Asset 8@2x.png";
+import dashboardFrame from "./assets/Frame.png";
 import {
   ArrowRight,
   Menu,
@@ -547,7 +549,7 @@ function AppContent() {
           {/* Infinity Logo */}
           <div className="mb-8 animate-fade-in">
             <img 
-              src="/src/assets/Asset 8@2x.png" 
+              src={infinityLogo} 
               alt="Coreza Infinity Logo"
               className="h-16 w-auto object-contain"
             />
@@ -583,7 +585,7 @@ function AppContent() {
             
             <div className="relative">
               <img 
-                src="/src/assets/Frame.png" 
+                src={dashboardFrame} 
                 alt="COREZA Dashboard"
                 className="w-full h-auto rounded-2xl shadow-2xl border border-brand-neutral-200 dark:border-brand-neutral-700"
               />
