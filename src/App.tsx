@@ -57,11 +57,40 @@ function AppContent() {
   const { language, setLanguage } = useLanguage();
   const t = translations[language as keyof typeof translations];
 
+  // Scroll animation hook
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // Animate elements on scroll
+      const animateOnScroll = () => {
+        const animationClasses = [
+          '.scroll-animate',
+          '.scroll-animate-left',
+          '.scroll-animate-right',
+          '.scroll-animate-scale',
+          '.scroll-animate-fade'
+        ];
+        
+        animationClasses.forEach(className => {
+          const elements = document.querySelectorAll(className);
+          elements.forEach((element) => {
+            const rect = element.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            if (rect.top <= windowHeight * 0.85) {
+              element.classList.add('animate-in');
+            }
+          });
+        });
+      };
+      
+      animateOnScroll();
     };
+    
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -189,18 +218,18 @@ function AppContent() {
   ];
 
   const integrations = [
-    { name: "Notion", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Notion_app_logo.png/1200px-Notion_app_logo.png" },
-    { name: "Figma", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1200px-Figma-logo.svg.png" },
-    { name: "Linear", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Linear_logo.svg/1200px-Linear_logo.svg.png" },
-    { name: "Vercel", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vercel_logo_black.svg/1200px-Vercel_logo_black.svg.png" },
-    { name: "Supabase", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Supabase_logo.svg/1200px-Supabase_logo.svg.png" },
-    { name: "PlanetScale", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/PlanetScale_logo.svg/1200px-PlanetScale_logo.svg.png" },
-    { name: "Railway", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Railway_logo.svg/1200px-Railway_logo.svg.png" },
-    { name: "Resend", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Resend_logo.svg/1200px-Resend_logo.svg.png" },
-    { name: "Clerk", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Clerk_logo.svg/1200px-Clerk_logo.svg.png" },
-    { name: "Prisma", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Prisma_logo.svg/1200px-Prisma_logo.svg.png" },
-    { name: "Stripe", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1200px-Stripe_Logo%2C_revised_2016.svg.png" },
-    { name: "OpenAI", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png" },
+    { name: "Notion", logo: "https://simpleicons.org/icons/notion.svg" },
+    { name: "Figma", logo: "https://simpleicons.org/icons/figma.svg" },
+    { name: "Linear", logo: "https://simpleicons.org/icons/linear.svg" },
+    { name: "Vercel", logo: "https://simpleicons.org/icons/vercel.svg" },
+    { name: "Supabase", logo: "https://simpleicons.org/icons/supabase.svg" },
+    { name: "PlanetScale", logo: "https://simpleicons.org/icons/planetscale.svg" },
+    { name: "Railway", logo: "https://simpleicons.org/icons/railway.svg" },
+    { name: "Resend", logo: "https://simpleicons.org/icons/resend.svg" },
+    { name: "Clerk", logo: "https://simpleicons.org/icons/clerk.svg" },
+    { name: "Prisma", logo: "https://simpleicons.org/icons/prisma.svg" },
+    { name: "Stripe", logo: "https://simpleicons.org/icons/stripe.svg" },
+    { name: "OpenAI", logo: "https://simpleicons.org/icons/openai.svg" },
   ];
 
   const testimonials = [
@@ -286,28 +315,85 @@ function AppContent() {
               </button>
               
               <div className="relative">
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value as "fr" | "en" | "ar")}
-                  className={`pl-10 pr-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                  theme === "dark"
-                    ? "bg-brand-neutral-800 border-brand-neutral-700 text-white"
-                    : "bg-brand-neutral-100 border-brand-neutral-200 text-brand-neutral-700"
-                  } border focus:outline-none focus:ring-2 focus:ring-brand-primary-500 appearance-none cursor-pointer`}
+                <button
+                  onClick={() => {
+                    const options = document.getElementById('desktop-lang-options');
+                    if (options) {
+                      options.classList.toggle('hidden');
+                    }
+                  }}
+                  className={`flex items-center gap-2 pl-3 pr-8 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    theme === "dark"
+                      ? "bg-brand-neutral-800 border-brand-neutral-700 text-white hover:bg-brand-neutral-700"
+                      : "bg-brand-neutral-100 border-brand-neutral-200 text-brand-neutral-700 hover:bg-brand-neutral-50"
+                  } border focus:outline-none focus:ring-2 focus:ring-brand-primary-500 cursor-pointer min-w-[90px]`}
                 >
-                  <option value="fr">FR</option>
-                  <option value="en">EN</option>
-                  <option value="ar">AR</option>
-              </select>
-                <div className="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                  {language === "fr" && <img src="https://flagcdn.com/w20/fr.png" alt="France" className="w-5 h-5 rounded-full object-cover" />}
-                  {language === "en" && <img src="https://flagcdn.com/w20/us.png" alt="USA" className="w-5 h-5 rounded-full object-cover" />}
-                  {language === "ar" && <img src="https://flagcdn.com/w20/dz.png" alt="Algeria" className="w-5 h-5 rounded-full object-cover" />}
-                </div>
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <img 
+                    src={language === "fr" ? "https://flagcdn.com/w20/fr.png" : language === "en" ? "https://flagcdn.com/w20/us.png" : "https://flagcdn.com/w20/dz.png"} 
+                    alt={language} 
+                    className="w-5 h-4 object-cover rounded-sm"
+                  />
+                  <span>{language.toUpperCase()}</span>
+                  <svg className="w-4 h-4 absolute right-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
+                </button>
+                <div
+                  id="desktop-lang-options"
+                  className={`hidden absolute top-full mt-1 right-0 rounded-xl shadow-lg border overflow-hidden min-w-[90px] z-50 ${
+                    theme === "dark"
+                      ? "bg-brand-neutral-800 border-brand-neutral-700"
+                      : "bg-white border-brand-neutral-200"
+                  }`}
+                >
+                  <button
+                    onClick={() => {
+                      setLanguage("fr");
+                      document.getElementById('desktop-lang-options')?.classList.add('hidden');
+                    }}
+                    className={`flex items-center gap-2 w-full px-3 py-2 text-sm font-medium transition-colors ${
+                      language === "fr"
+                        ? "bg-brand-primary-600 text-white"
+                        : theme === "dark"
+                        ? "text-white hover:bg-brand-neutral-700"
+                        : "text-brand-neutral-700 hover:bg-brand-neutral-50"
+                    }`}
+                  >
+                    <img src="https://flagcdn.com/w20/fr.png" alt="FR" className="w-5 h-4 object-cover rounded-sm" />
+                    <span>FR</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setLanguage("en");
+                      document.getElementById('desktop-lang-options')?.classList.add('hidden');
+                    }}
+                    className={`flex items-center gap-2 w-full px-3 py-2 text-sm font-medium transition-colors ${
+                      language === "en"
+                        ? "bg-brand-primary-600 text-white"
+                        : theme === "dark"
+                        ? "text-white hover:bg-brand-neutral-700"
+                        : "text-brand-neutral-700 hover:bg-brand-neutral-50"
+                    }`}
+                  >
+                    <img src="https://flagcdn.com/w20/us.png" alt="EN" className="w-5 h-4 object-cover rounded-sm" />
+                    <span>EN</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setLanguage("ar");
+                      document.getElementById('desktop-lang-options')?.classList.add('hidden');
+                    }}
+                    className={`flex items-center gap-2 w-full px-3 py-2 text-sm font-medium transition-colors ${
+                      language === "ar"
+                        ? "bg-brand-primary-600 text-white"
+                        : theme === "dark"
+                        ? "text-white hover:bg-brand-neutral-700"
+                        : "text-brand-neutral-700 hover:bg-brand-neutral-50"
+                    }`}
+                  >
+                    <img src="https://flagcdn.com/w20/dz.png" alt="AR" className="w-5 h-4 object-cover rounded-sm" />
+                    <span>AR</span>
+                  </button>
                 </div>
               </div>
 
@@ -360,28 +446,85 @@ function AppContent() {
                   {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
                 </button>
                 <div className="relative">
-                <select
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value as "fr" | "en" | "ar")}
-                    className={`pl-10 pr-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                    theme === "dark"
-                      ? "bg-brand-neutral-800 border-brand-neutral-700 text-white"
-                      : "bg-brand-neutral-100 border-brand-neutral-200 text-brand-neutral-700"
-                    } border focus:outline-none focus:ring-2 focus:ring-brand-primary-500 appearance-none cursor-pointer`}
+                  <button
+                    onClick={() => {
+                      const options = document.getElementById('mobile-lang-options');
+                      if (options) {
+                        options.classList.toggle('hidden');
+                      }
+                    }}
+                    className={`flex items-center gap-2 pl-3 pr-8 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                      theme === "dark"
+                        ? "bg-brand-neutral-800 border-brand-neutral-700 text-white hover:bg-brand-neutral-700"
+                        : "bg-brand-neutral-100 border-brand-neutral-200 text-brand-neutral-700 hover:bg-brand-neutral-50"
+                    } border focus:outline-none focus:ring-2 focus:ring-brand-primary-500 cursor-pointer min-w-[90px]`}
                   >
-                    <option value="fr">FR</option>
-                    <option value="en">EN</option>
-                    <option value="ar">AR</option>
-                </select>
-                  <div className="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    {language === "fr" && <img src="https://flagcdn.com/w20/fr.png" alt="France" className="w-5 h-5 rounded-full object-cover" />}
-                    {language === "en" && <img src="https://flagcdn.com/w20/us.png" alt="USA" className="w-5 h-5 rounded-full object-cover" />}
-                    {language === "ar" && <img src="https://flagcdn.com/w20/dz.png" alt="Algeria" className="w-5 h-5 rounded-full object-cover" />}
-                  </div>
-                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <img 
+                      src={language === "fr" ? "https://flagcdn.com/w20/fr.png" : language === "en" ? "https://flagcdn.com/w20/us.png" : "https://flagcdn.com/w20/dz.png"} 
+                      alt={language} 
+                      className="w-5 h-4 object-cover rounded-sm"
+                    />
+                    <span>{language.toUpperCase()}</span>
+                    <svg className="w-4 h-4 absolute right-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
+                  </button>
+                  <div
+                    id="mobile-lang-options"
+                    className={`hidden absolute top-full mt-1 right-0 rounded-xl shadow-lg border overflow-hidden min-w-[90px] z-50 ${
+                      theme === "dark"
+                        ? "bg-brand-neutral-800 border-brand-neutral-700"
+                        : "bg-white border-brand-neutral-200"
+                    }`}
+                  >
+                    <button
+                      onClick={() => {
+                        setLanguage("fr");
+                        document.getElementById('mobile-lang-options')?.classList.add('hidden');
+                      }}
+                      className={`flex items-center gap-2 w-full px-3 py-2 text-sm font-medium transition-colors ${
+                        language === "fr"
+                          ? "bg-brand-primary-600 text-white"
+                          : theme === "dark"
+                          ? "text-white hover:bg-brand-neutral-700"
+                          : "text-brand-neutral-700 hover:bg-brand-neutral-50"
+                      }`}
+                    >
+                      <img src="https://flagcdn.com/w20/fr.png" alt="FR" className="w-5 h-4 object-cover rounded-sm" />
+                      <span>FR</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        setLanguage("en");
+                        document.getElementById('mobile-lang-options')?.classList.add('hidden');
+                      }}
+                      className={`flex items-center gap-2 w-full px-3 py-2 text-sm font-medium transition-colors ${
+                        language === "en"
+                          ? "bg-brand-primary-600 text-white"
+                          : theme === "dark"
+                          ? "text-white hover:bg-brand-neutral-700"
+                          : "text-brand-neutral-700 hover:bg-brand-neutral-50"
+                      }`}
+                    >
+                      <img src="https://flagcdn.com/w20/us.png" alt="EN" className="w-5 h-4 object-cover rounded-sm" />
+                      <span>EN</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        setLanguage("ar");
+                        document.getElementById('mobile-lang-options')?.classList.add('hidden');
+                      }}
+                      className={`flex items-center gap-2 w-full px-3 py-2 text-sm font-medium transition-colors ${
+                        language === "ar"
+                          ? "bg-brand-primary-600 text-white"
+                          : theme === "dark"
+                          ? "text-white hover:bg-brand-neutral-700"
+                          : "text-brand-neutral-700 hover:bg-brand-neutral-50"
+                      }`}
+                    >
+                      <img src="https://flagcdn.com/w20/dz.png" alt="AR" className="w-5 h-4 object-cover rounded-sm" />
+                      <span>AR</span>
+                    </button>
                   </div>
                 </div>
                 <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-brand-primary-600 text-white hover:bg-brand-primary-700 h-10 px-4 py-2 flex-1">
@@ -393,235 +536,65 @@ function AppContent() {
         )}
       </nav>
 
-      {/* COREZA ERP Hero Section */}
-      <section className="relative pt-20 min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-brand-neutral-900">
-        {/* Enhanced Blurry Background with More Lights */}
+      {/* Hero Section - Redesigned to match Figma */}
+      <section className="relative pt-32 pb-24 min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-brand-neutral-900 dark:to-brand-neutral-800">
+        {/* Background Pattern */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:50px_50px] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]"></div>
-          
-          {/* Multiple Blurry Light Effects */}
-          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
-          <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl animate-pulse-slow animation-delay-400"></div>
-          <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-purple-500/8 rounded-full blur-3xl animate-pulse-slow animation-delay-200"></div>
-          <div className="absolute bottom-1/3 right-1/3 w-72 h-72 bg-cyan-500/8 rounded-full blur-3xl animate-pulse-slow animation-delay-600"></div>
-          <div className="absolute top-1/6 left-1/2 w-48 h-48 bg-indigo-500/6 rounded-full blur-3xl animate-pulse-slow animation-delay-800"></div>
-          <div className="absolute bottom-1/6 right-1/6 w-56 h-56 bg-rose-500/6 rounded-full blur-3xl animate-pulse-slow animation-delay-1000"></div>
         </div>
 
-        <div className="container-max relative z-10 flex flex-col items-center text-center">
-          {/* Pre-headline Badge */}
-          <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-brand-primary-600 text-white text-sm font-medium mb-8 animate-fade-in">
-            <Zap className="w-4 h-4 mr-2" />
-            DÉBLOQUEZ LA PUISSANCE DE L'IA
+        <div className="container-max relative z-10 flex flex-col items-center text-center px-4">
+          {/* Infinity Logo */}
+          <div className="mb-8 animate-fade-in">
+            <img 
+              src="/src/assets/Asset 8@2x.png" 
+              alt="Coreza Infinity Logo"
+              className="h-16 w-auto object-contain"
+            />
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl lg:text-6xl font-bold text-brand-neutral-900 dark:text-white mb-6 text-balance max-w-4xl animate-fade-in animation-delay-200">
-            Transformez votre entreprise avec{" "}
-            <span className="bg-gradient-to-r from-brand-primary-600 to-brand-secondary-500 bg-clip-text text-transparent">
-              COREZA ERP intelligent
-            </span>
+          <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-brand-neutral-900 dark:text-white mb-6 whitespace-nowrap animate-fade-in animation-delay-200">
+            L'intelligence qui transforme votre entreprise!
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-brand-neutral-600 dark:text-brand-neutral-300 leading-relaxed max-w-2xl mb-12 animate-fade-in animation-delay-400">
-            Gérez tous vos processus métier avec une solution ERP complète, intelligente et prédictive. Optimisez vos performances avec l'IA.
+          <p className="text-lg lg:text-xl text-brand-neutral-600 dark:text-brand-neutral-300 leading-relaxed max-w-3xl mb-12 animate-fade-in animation-delay-400">
+            Gérez tous vos processus métier avec une solution ERP complète, intelligente
+            et prédictive. Optimisez vos performances avec l'IA.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16 animate-fade-in animation-delay-600">
-            <button className="inline-flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-brand-primary-600 text-white hover:bg-brand-primary-700 h-11 px-6 shadow-sm hover:shadow-md group">
+            <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-brand-primary-600 text-white hover:bg-brand-primary-700 h-12 px-8 shadow-sm hover:shadow-md group">
               Commencer gratuitement
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="inline-flex items-center justify-center rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-6 group">
-              <Play className="mr-2 w-4 h-4" />
+            <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border-2 border-brand-neutral-300 dark:border-brand-neutral-600 bg-white dark:bg-brand-neutral-800 hover:bg-brand-neutral-50 dark:hover:bg-brand-neutral-700 text-brand-neutral-900 dark:text-white h-12 px-8 group">
+              <Play className="mr-2 w-5 h-5" />
               Voir la démo
             </button>
           </div>
 
-          {/* COREZA ERP Dashboard Frame */}
+          {/* Dashboard Frame Image */}
           <div className="relative w-full max-w-6xl animate-fade-in animation-delay-800">
-            {/* Blue/Pink Blur Effect Behind Dashboard */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-pink-500/10 to-blue-600/10 rounded-2xl blur-3xl scale-110 animate-pulse-slow"></div>
+            {/* Blue/Pink Blur Effect Behind Frame */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-pink-500/20 to-blue-600/20 rounded-2xl blur-3xl scale-110 animate-pulse-slow"></div>
             
-            {/* Dashboard Container */}
-            <div className="relative bg-white dark:bg-brand-neutral-900 rounded-2xl shadow-lg border border-brand-neutral-200 dark:border-brand-neutral-700 overflow-hidden backdrop-blur-sm">
-              {/* Dashboard Header */}
-              <div className="flex items-center justify-between p-6 border-b border-brand-neutral-200 dark:border-brand-neutral-700">
-                <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 bg-brand-primary-600 rounded-xl flex items-center justify-center">
-                    <BarChart3 className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-lg font-bold text-brand-neutral-900 dark:text-white">COREZA ERP</div>
-                    <div className="text-sm text-brand-neutral-500 dark:text-brand-neutral-400">Tableau de bord intelligent</div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-xs text-brand-neutral-600 dark:text-brand-neutral-300 font-medium">IA Active</span>
-                </div>
-              </div>
-
-              {/* Dashboard Content */}
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-0">
-                {/* Left Sidebar - ERP Modules */}
-                <div className="lg:col-span-1 bg-brand-neutral-50 dark:bg-brand-neutral-800 p-6 space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-brand-primary-50 dark:bg-brand-primary-900/20 text-brand-primary-600 dark:text-brand-primary-400">
-                      <BarChart3 className="w-4 h-4" />
-                      <span className="text-sm font-medium">Dashboard</span>
-                    </div>
-                    <div className="flex items-center space-x-3 px-3 py-2 rounded-lg text-brand-neutral-600 dark:text-brand-neutral-300 hover:bg-brand-neutral-100 dark:hover:bg-brand-neutral-700 transition-colors">
-                      <Users className="w-4 h-4" />
-                      <span className="text-sm font-medium">CRM</span>
-                    </div>
-                    <div className="flex items-center space-x-3 px-3 py-2 rounded-lg text-brand-neutral-600 dark:text-brand-neutral-300 hover:bg-brand-neutral-100 dark:hover:bg-brand-neutral-700 transition-colors">
-                      <ShoppingCart className="w-4 h-4" />
-                      <span className="text-sm font-medium">Ventes</span>
-                    </div>
-                    <div className="flex items-center space-x-3 px-3 py-2 rounded-lg text-brand-neutral-600 dark:text-brand-neutral-300 hover:bg-brand-neutral-100 dark:hover:bg-brand-neutral-700 transition-colors">
-                      <Package className="w-4 h-4" />
-                      <span className="text-sm font-medium">Stock</span>
-                    </div>
-                    <div className="flex items-center space-x-3 px-3 py-2 rounded-lg text-brand-neutral-600 dark:text-brand-neutral-300 hover:bg-brand-neutral-100 dark:hover:bg-brand-neutral-700 transition-colors">
-                      <CreditCard className="w-4 h-4" />
-                      <span className="text-sm font-medium">Finance</span>
-                    </div>
-                    <div className="flex items-center space-x-3 px-3 py-2 rounded-lg text-brand-neutral-600 dark:text-brand-neutral-300 hover:bg-brand-neutral-100 dark:hover:bg-brand-neutral-700 transition-colors">
-                      <Settings className="w-4 h-4" />
-                      <span className="text-sm font-medium">Paramètres</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Main Content - ERP Analytics */}
-                <div className="lg:col-span-2 p-6">
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-brand-neutral-900 dark:text-white">Analyses en temps réel</h3>
-                    <p className="text-sm text-brand-neutral-500 dark:text-brand-neutral-400">Tableau de bord prédictif COREZA</p>
-                  </div>
-                  
-                  {/* KPI Cards */}
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-4 border border-green-200 dark:border-green-800">
-                      <div className="flex items-center justify-between mb-2">
-                        <TrendingUp className="w-5 h-5 text-green-600" />
-                        <span className="text-xs text-green-600 font-medium">+12.5%</span>
-                      </div>
-                      <div className="text-2xl font-bold text-green-700 dark:text-green-400">
-                        <AnimatedNumber 
-                          end={2847500} 
-                          prefix="€" 
-                          duration={3000} 
-                          delay={500}
-                          className="text-2xl font-bold"
-                        />
-                      </div>
-                      <div className="text-sm text-green-600 dark:text-green-400">Chiffre d'affaires</div>
-                    </div>
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
-                      <div className="flex items-center justify-between mb-2">
-                        <Users className="w-5 h-5 text-blue-600" />
-                        <span className="text-xs text-blue-600 font-medium">+8.2%</span>
-                      </div>
-                      <div className="text-2xl font-bold text-blue-700 dark:text-blue-400">
-                        <AnimatedNumber 
-                          end={1247} 
-                          duration={2500} 
-                          delay={800}
-                          className="text-2xl font-bold"
-                        />
-                      </div>
-                      <div className="text-sm text-blue-600 dark:text-blue-400">Clients actifs</div>
-                    </div>
-                  </div>
-
-                  {/* Performance Chart */}
-                  <div className="bg-brand-neutral-50 dark:bg-brand-neutral-800 rounded-xl p-6 border border-brand-neutral-200 dark:border-brand-neutral-700">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <div className="text-sm font-semibold text-brand-neutral-900 dark:text-white">Performance IA</div>
-                        <div className="text-xs text-brand-neutral-500 dark:text-brand-neutral-400">Analyse prédictive</div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <div className="text-sm text-green-600 font-medium">+24.3%</div>
-                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-center">
-                      <AnimatedChart
-                        data={[
-                          { month: 'Jan', value: 65 },
-                          { month: 'Fév', value: 78 },
-                          { month: 'Mar', value: 85 },
-                          { month: 'Avr', value: 92 },
-                          { month: 'Mai', value: 88 },
-                          { month: 'Jun', value: 95 },
-                          { month: 'Jul', value: 100 }
-                        ]}
-                        height={100}
-                        width={350}
-                        color={theme === 'dark' ? '#FFFFFF' : '#1F2937'}
-                        delay={1000}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Sidebar - AI Insights */}
-                <div className="lg:col-span-1 bg-brand-neutral-50 dark:bg-brand-neutral-800 p-6">
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-brand-neutral-900 dark:text-white mb-2">Insights IA</h4>
-                    <div className="text-xs text-brand-neutral-500 dark:text-brand-neutral-400 mb-4">
-                      Recommandations intelligentes
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    {/* AI Suggestion */}
-                    <div className="bg-gradient-to-r from-brand-primary-50 to-brand-secondary-50 dark:from-brand-primary-900/20 dark:to-brand-secondary-900/20 rounded-lg p-3 border border-brand-primary-200 dark:border-brand-primary-800">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Zap className="w-4 h-4 text-brand-primary-600" />
-                        <span className="text-xs font-medium text-brand-neutral-900 dark:text-white">Optimisation</span>
-                      </div>
-                      <p className="text-xs text-brand-neutral-600 dark:text-brand-neutral-300 mb-2">
-                        Augmentez vos ventes de 15% en ciblant les clients à fort potentiel.
-                      </p>
-                      <button className="text-xs bg-brand-primary-500 text-white px-2 py-1 rounded hover:bg-brand-primary-600 transition-colors">
-                        Appliquer
-                      </button>
-                    </div>
-
-                    {/* Stats */}
-                    <div className="pt-3 border-t border-brand-neutral-200 dark:border-brand-neutral-700">
-                      <div className="text-xs font-medium text-brand-neutral-600 dark:text-brand-neutral-300 mb-2">Métriques</div>
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-xs">
-                          <span className="text-brand-neutral-500 dark:text-brand-neutral-400">Efficacité</span>
-                          <span className="text-brand-neutral-900 dark:text-white font-medium">94%</span>
-                        </div>
-                        <div className="flex justify-between text-xs">
-                          <span className="text-brand-neutral-500 dark:text-brand-neutral-400">Prédictions</span>
-                          <span className="text-brand-neutral-900 dark:text-white font-medium">87%</span>
-                        </div>
-                        <div className="flex justify-between text-xs">
-                          <span className="text-brand-neutral-500 dark:text-brand-neutral-400">Automatisation</span>
-                          <span className="text-brand-neutral-900 dark:text-white font-medium">76%</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="relative">
+              <img 
+                src="/src/assets/Frame.png" 
+                alt="COREZA Dashboard"
+                className="w-full h-auto rounded-2xl shadow-2xl border border-brand-neutral-200 dark:border-brand-neutral-700"
+              />
             </div>
           </div>
         </div>
 
-        {/* Smooth Shade Separation */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-brand-neutral-900 via-white/90 dark:via-brand-neutral-900/90 to-transparent pointer-events-none"></div>
+        {/* White Gradient Fade at Bottom for Smooth Transition */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none z-20">
+          <div className="w-full h-full bg-gradient-to-t from-white via-white/95 to-transparent dark:from-brand-neutral-900 dark:via-brand-neutral-900/95 dark:to-transparent"></div>
+        </div>
       </section>
 
       {/* Stats Section */}
@@ -642,7 +615,7 @@ function AppContent() {
         <div className="container-max relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <div className="space-y-8 animate-fade-in">
+            <div className="space-y-8 scroll-animate-left">
               <div className="space-y-4">
                 <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-primary-50 dark:bg-brand-primary-900/20 text-brand-primary-600 dark:text-brand-primary-400 text-sm font-medium">
                   <Zap className="w-4 h-4 mr-2" />
@@ -676,7 +649,7 @@ function AppContent() {
             </div>
 
             {/* Right Content - Minimalistic Dashboard Preview */}
-            <div className="relative animate-slide-in-right">
+            <div className="relative scroll-animate-right">
               <div className="relative">
                 {/* Main Dashboard */}
                 <div className="bg-white dark:bg-brand-neutral-900 rounded-2xl shadow-medium p-8 transform rotate-1 hover:rotate-0 transition-transform duration-500 border border-brand-neutral-200 dark:border-brand-neutral-700">
@@ -838,7 +811,7 @@ function AppContent() {
       {/* Stats Section */}
       <section className="section-padding bg-white dark:bg-brand-neutral-900">
         <div className="container-max">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate">
             <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4 title-spacing text-balance">
               {t.stats.title}
             </h2>
@@ -849,17 +822,18 @@ function AppContent() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <AnimatedStat
-                key={index}
-                number={stat.number}
-                label={stat.label}
-                icon={stat.icon}
-                actualNumber={stat.actualNumber}
-                suffix={stat.suffix}
-                decimals={stat.decimals}
-                delay={stat.delay}
-                duration={2500}
-              />
+              <div key={index} className={`scroll-animate stagger-${index + 1}`}>
+                <AnimatedStat
+                  number={stat.number}
+                  label={stat.label}
+                  icon={stat.icon}
+                  actualNumber={stat.actualNumber}
+                  suffix={stat.suffix}
+                  decimals={stat.decimals}
+                  delay={stat.delay}
+                  duration={2500}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -880,7 +854,7 @@ function AppContent() {
           <div className="absolute bottom-1/6 right-1/6 w-56 h-56 bg-rose-500/6 rounded-full blur-3xl animate-pulse-slow animation-delay-1000"></div>
         </div>
         <div className="container-max">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate">
             <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4 title-spacing text-balance">
               {t.modules.title}
             </h2>
@@ -895,7 +869,7 @@ function AppContent() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {modules.map((module, index) => (
-              <div key={index} className="bg-white dark:bg-brand-neutral-800 rounded-xl p-6 group cursor-pointer border border-brand-neutral-200 dark:border-brand-neutral-700 hover:shadow-md transition-all duration-300">
+              <div key={index} className={`bg-white dark:bg-brand-neutral-800 rounded-xl p-6 group cursor-pointer border border-brand-neutral-200 dark:border-brand-neutral-700 hover:shadow-md transition-all duration-300 scroll-animate stagger-${(index % 8) + 1}`}>
                 <div className={`w-14 h-14 bg-brand-neutral-100 dark:bg-brand-neutral-700 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 border border-brand-neutral-200 dark:border-brand-neutral-600`}>
                   <module.icon className="w-7 h-7 text-brand-neutral-700 dark:text-brand-neutral-300" />
                 </div>
@@ -914,7 +888,7 @@ function AppContent() {
       {/* Features Section */}
       <section id="features" className="section-padding bg-white dark:bg-brand-neutral-900">
         <div className="container-max">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate">
             <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4 text-balance">
               {t.features.title}
             </h2>
@@ -962,7 +936,7 @@ function AppContent() {
                 color: "orange",
               },
             ].map((feature, index) => (
-              <div key={index} className="bg-white dark:bg-brand-neutral-800 rounded-xl p-8 group border border-brand-neutral-200 dark:border-brand-neutral-700 hover:shadow-md transition-all duration-300">
+              <div key={index} className={`bg-white dark:bg-brand-neutral-800 rounded-xl p-8 group border border-brand-neutral-200 dark:border-brand-neutral-700 hover:shadow-md transition-all duration-300 scroll-animate stagger-${(index % 6) + 1}`}>
                 <div className="w-12 h-12 bg-brand-neutral-100 dark:bg-brand-neutral-700 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-brand-neutral-200 dark:border-brand-neutral-600">
                   <feature.icon className="w-6 h-6 text-brand-neutral-700 dark:text-brand-neutral-300" />
                 </div>
@@ -978,101 +952,97 @@ function AppContent() {
         </div>
       </section>
 
-      {/* Security Section */}
-      <section id="security" className="section-padding bg-white dark:bg-brand-neutral-900">
+      {/* Security Section - Simple & Minimalistic */}
+      <section id="security" className="section-padding bg-transparent">
         <div className="container-max">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Left: Security Features */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h2 className="text-4xl lg:text-5xl font-display font-bold text-balance">
-              Sécurité et conformité de niveau entreprise
+          {/* Header */}
+          <div className="max-w-2xl mx-auto text-center mb-16 scroll-animate">
+            <h2 className="text-4xl lg:text-5xl font-bold text-brand-neutral-900 dark:text-white mb-4">
+              Vos données en toute sécurité
             </h2>
-                <p className="text-xl text-brand-neutral-600 dark:text-brand-neutral-300 leading-relaxed">
-              Vos données sont protégées par les standards les plus élevés. Nous veillons à votre tranquillité d'esprit, tout simplement.
+            <p className="text-lg text-brand-neutral-600 dark:text-brand-neutral-400">
+              Simple, sécurisé, fiable. Nous protégeons ce qui compte le plus.
             </p>
           </div>
 
-              <div className="grid gap-6">
-                {[
-                  {
-                    icon: Lock,
-                    title: "Vos données sont privées et protégées",
-                    description: "Chiffrement de bout en bout et accès sécurisé"
-                  },
-                  {
-                    icon: Shield,
-                    title: "Nous respectons votre vie privée",
-                    description: "Conformité RGPD et protection des données personnelles"
-                  },
-                  {
-                    icon: Database,
-                    title: "Sauvegarde automatique et continue",
-                    description: "Protection contre la perte de données"
-                  },
-                  {
-                    icon: Clock,
-                    title: "Surveillance 24/7 pour votre sérénité",
-                    description: "Monitoring continu et détection d'intrusions"
-                  }
-                ].map((feature, index) => (
-                  <div key={index} className="group">
-                    <div className="flex items-start gap-4 p-6 rounded-2xl border border-brand-neutral-200 dark:border-brand-neutral-700 hover:border-brand-neutral-300 dark:hover:border-brand-neutral-600 transition-all duration-300 hover:shadow-sm">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-primary-500/10 to-brand-secondary-500/10 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
-                        <feature.icon className="w-6 h-6 text-brand-primary-600 dark:text-brand-primary-400" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-brand-neutral-900 dark:text-white text-lg mb-2">
-                          {feature.title}
-                        </h3>
-                        <p className="text-brand-neutral-600 dark:text-brand-neutral-300 text-sm">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+          {/* Simple Stats */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16 max-w-4xl mx-auto">
+            <div className="text-center scroll-animate stagger-1">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-green-100 dark:bg-green-900/20 flex items-center justify-center">
+                <Shield className="w-8 h-8 text-green-600 dark:text-green-400" />
               </div>
+              <div className="text-4xl font-bold text-brand-neutral-900 dark:text-white mb-2">100%</div>
+              <div className="text-sm text-brand-neutral-600 dark:text-brand-neutral-400">Sécurisé</div>
             </div>
 
-          {/* Right: Certification Card */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-sm">
-                <div className="bg-white dark:bg-brand-neutral-800 rounded-3xl p-8 border border-brand-neutral-200 dark:border-brand-neutral-700 shadow-lg hover:shadow-xl transition-all duration-300">
-                  {/* Header */}
-                  <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                      <Shield className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-brand-neutral-900 dark:text-white mb-3">
-                      Sécurité Certifiée
-                    </h3>
-                    <p className="text-brand-neutral-600 dark:text-brand-neutral-300 leading-relaxed">
-                Vos données sont protégées par les standards les plus élevés de l'industrie. Nous faisons de la sécurité une priorité pour tous.
-              </p>
-                </div>
+            <div className="text-center scroll-animate stagger-2">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
+                <Lock className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div className="text-4xl font-bold text-brand-neutral-900 dark:text-white mb-2">Privé</div>
+              <div className="text-sm text-brand-neutral-600 dark:text-brand-neutral-400">Vos données vous appartiennent</div>
+            </div>
 
-                  {/* Stats */}
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="text-center p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
-                      <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">100%</div>
-                      <div className="text-sm font-medium text-green-700 dark:text-green-300">Protection</div>
-                </div>
-                    <div className="text-center p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
-                      <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">99.9%</div>
-                      <div className="text-sm font-medium text-blue-700 dark:text-blue-300">Disponibilité</div>
-                    </div>
-                  </div>
+            <div className="text-center scroll-animate stagger-3">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-purple-100 dark:bg-purple-900/20 flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+              </div>
+              <div className="text-4xl font-bold text-brand-neutral-900 dark:text-white mb-2">24/7</div>
+              <div className="text-sm text-brand-neutral-600 dark:text-brand-neutral-400">Toujours disponible</div>
+            </div>
+          </div>
 
-                  {/* Trust indicators */}
-                  <div className="mt-6 pt-6 border-t border-brand-neutral-200 dark:border-brand-neutral-700">
-                    <div className="flex items-center justify-center gap-2 text-sm text-brand-neutral-500 dark:text-brand-neutral-400">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <span>Certifié ISO 27001</span>
+          {/* Simple Feature Cards */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              {
+                icon: Shield,
+                title: "Protection automatique",
+                description: "Vos données sont protégées automatiquement, sans effort de votre part."
+              },
+              {
+                icon: Lock,
+                title: "Confidentialité garantie",
+                description: "Nous ne partageons jamais vos informations avec des tiers."
+              },
+              {
+                icon: Database,
+                title: "Sauvegarde continue",
+                description: "Ne perdez jamais vos données. Tout est sauvegardé en permanence."
+              },
+              {
+                icon: Clock,
+                title: "Toujours accessible",
+                description: "Accédez à vos données où que vous soyez, à tout moment."
+              }
+            ].map((feature, index) => (
+              <div key={index} className={`scroll-animate stagger-${index + 1}`}>
+                <div className="group p-6 rounded-2xl bg-white/50 dark:bg-brand-neutral-800/50 backdrop-blur-sm border border-brand-neutral-200 dark:border-brand-neutral-700 hover:bg-white dark:hover:bg-brand-neutral-800 transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-brand-neutral-100 dark:bg-brand-neutral-700 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <feature.icon className="w-6 h-6 text-brand-neutral-700 dark:text-brand-neutral-300" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-brand-neutral-900 dark:text-white mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm text-brand-neutral-600 dark:text-brand-neutral-400 leading-relaxed">
+                        {feature.description}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          {/* Trust Badge */}
+          <div className="mt-16 text-center scroll-animate">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/80 dark:bg-brand-neutral-800/80 backdrop-blur-sm border border-brand-neutral-200 dark:border-brand-neutral-700">
+              <CheckCircle className="w-5 h-5 text-green-500" />
+              <span className="text-sm font-medium text-brand-neutral-700 dark:text-brand-neutral-300">
+                Certifié et conforme aux normes européennes
+              </span>
             </div>
           </div>
         </div>
@@ -1081,7 +1051,7 @@ function AppContent() {
       {/* Integrations Section - Creative Vertical Animation */}
       <section id="integrations" className="section-padding bg-white dark:bg-brand-neutral-900 relative overflow-hidden">
         <div className="container-max">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate">
             <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4 text-balance">
               {t.integrations.title}
             </h2>
@@ -1098,7 +1068,7 @@ function AppContent() {
           <div className="relative">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
               {integrations.map((integration, index) => (
-                  <div key={index} className="group">
+                  <div key={index} className={`group scroll-animate-scale stagger-${(index % 8) + 1}`}>
                   <div className="w-full h-24 bg-white dark:bg-brand-neutral-800 rounded-2xl flex items-center justify-center p-4 shadow-sm border border-brand-neutral-200 dark:border-brand-neutral-700 hover:shadow-lg hover:border-brand-neutral-300 dark:hover:border-brand-neutral-600 transition-all duration-300 hover:scale-105 relative overflow-hidden">
                       {/* Subtle background animation */}
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-primary-500/5 to-brand-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -1123,7 +1093,7 @@ function AppContent() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-16 text-center">
+          <div className="mt-16 text-center scroll-animate">
             <div className="inline-flex items-center space-x-8 text-sm text-brand-neutral-500 dark:text-brand-neutral-400">
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -1145,7 +1115,7 @@ function AppContent() {
       {/* Testimonials Section */}
       <section id="testimonials" className="section-padding bg-white dark:bg-brand-neutral-900">
         <div className="container-max">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate">
             <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4 text-balance">
               Ce que disent nos clients
             </h2>
@@ -1156,7 +1126,7 @@ function AppContent() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="group relative">
+              <div key={index} className={`group relative scroll-animate stagger-${index + 1}`}>
                 <div className="bg-white dark:bg-brand-neutral-800 rounded-2xl p-8 border border-brand-neutral-200 dark:border-brand-neutral-700 hover:border-brand-neutral-300 dark:hover:border-brand-neutral-600 transition-all duration-300 hover:shadow-lg">
                   {/* Avatar and Info */}
                   <div className="flex items-start gap-4 mb-6">
@@ -1199,7 +1169,7 @@ function AppContent() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-brand-primary-600 to-brand-secondary-500">
+      <section className="section-padding bg-gradient-to-r from-brand-primary-600 to-brand-secondary-500 scroll-animate-scale">
         <div className="container-max text-center">
           <h2 className="text-4xl lg:text-5xl font-display font-bold text-white mb-6 text-balance">
             {t.cta.title}
