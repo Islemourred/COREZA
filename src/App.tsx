@@ -5,8 +5,8 @@ import { corezaLogos } from "./assets/logos";
 import { AnimatedStat } from "./components/AnimatedStat";
 import { AnimatedNumber } from "./components/AnimatedNumber";
 import { AnimatedChart } from "./components/AnimatedChart";
+import AnimatedDashboard from "./components/AnimatedDashboard";
 import infinityLogo from "./assets/Asset 8@2x.png";
-import dashboardFrame from "./assets/Frame.png";
 import {
   ArrowRight,
   Menu,
@@ -578,17 +578,13 @@ function AppContent() {
             </button>
           </div>
 
-          {/* Dashboard Frame Image */}
-          <div className="relative w-full max-w-6xl animate-fade-in animation-delay-800">
-            {/* Blue/Pink Blur Effect Behind Frame */}
+          {/* Animated Dashboard Prototype */}
+          <div className="relative w-full animate-fade-in animation-delay-800">
+            {/* Blue/Pink Blur Effect Behind Dashboard */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-pink-500/20 to-blue-600/20 rounded-2xl blur-3xl scale-110 animate-pulse-slow"></div>
             
             <div className="relative">
-              <img 
-                src={dashboardFrame} 
-                alt="COREZA Dashboard"
-                className="w-full h-auto rounded-2xl shadow-2xl border border-brand-neutral-200 dark:border-brand-neutral-700"
-              />
+              <AnimatedDashboard />
             </div>
           </div>
         </div>
