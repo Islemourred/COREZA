@@ -417,7 +417,7 @@ function AppContent() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-brand-neutral-200 dark:border-brand-neutral-800 bg-white dark:bg-brand-neutral-900">
-            <div className="container-max py-6 space-y-4">
+            <div className="container-max py-6 space-y-4 px-4">
               <a href="#modules" className="block text-sm font-medium hover:text-brand-primary-600 transition-colors">
                 {t.nav.modules}
               </a>
@@ -547,39 +547,39 @@ function AppContent() {
 
         <div className="container-max relative z-10 flex flex-col items-center text-center px-4">
           {/* Infinity Logo */}
-          <div className="mb-8 animate-fade-in">
+          <div className="mb-6 sm:mb-8 animate-fade-in">
             <img 
               src={infinityLogo} 
               alt="Coreza Infinity Logo"
-              className="h-16 w-auto object-contain"
+              className="h-12 sm:h-14 md:h-16 w-auto object-contain"
             />
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-brand-neutral-900 dark:text-white mb-6 whitespace-nowrap animate-fade-in animation-delay-200">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-brand-neutral-900 dark:text-white mb-6 px-4 sm:whitespace-nowrap animate-fade-in animation-delay-200">
             L'intelligence qui transforme votre entreprise!
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg lg:text-xl text-brand-neutral-600 dark:text-brand-neutral-300 leading-relaxed max-w-3xl mb-12 animate-fade-in animation-delay-400">
+          <p className="text-base sm:text-lg lg:text-xl text-brand-neutral-600 dark:text-brand-neutral-300 leading-relaxed max-w-3xl mb-12 px-4 animate-fade-in animation-delay-400">
             Gérez tous vos processus métier avec une solution ERP complète, intelligente
             et prédictive. Optimisez vos performances avec l'IA.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-16 animate-fade-in animation-delay-600">
-            <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-brand-primary-600 text-white hover:bg-brand-primary-700 h-12 px-8 shadow-sm hover:shadow-md group">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16 w-full sm:w-auto px-4 animate-fade-in animation-delay-600">
+            <button className="inline-flex items-center justify-center rounded-lg text-sm sm:text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-brand-primary-600 text-white hover:bg-brand-primary-700 h-11 sm:h-12 px-6 sm:px-8 shadow-sm hover:shadow-md group">
               Commencer gratuitement
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border-2 border-brand-neutral-300 dark:border-brand-neutral-600 bg-white dark:bg-brand-neutral-800 hover:bg-brand-neutral-50 dark:hover:bg-brand-neutral-700 text-brand-neutral-900 dark:text-white h-12 px-8 group">
-              <Play className="mr-2 w-5 h-5" />
+            <button className="inline-flex items-center justify-center rounded-lg text-sm sm:text-base font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border-2 border-brand-neutral-300 dark:border-brand-neutral-600 bg-white dark:bg-brand-neutral-800 hover:bg-brand-neutral-50 dark:hover:bg-brand-neutral-700 text-brand-neutral-900 dark:text-white h-11 sm:h-12 px-6 sm:px-8 group">
+              <Play className="mr-2 w-4 sm:w-5 h-4 sm:h-5" />
               Voir la démo
             </button>
           </div>
 
-          {/* Animated Dashboard Prototype */}
-          <div className="relative w-full animate-fade-in animation-delay-800">
+          {/* Animated Dashboard Prototype - Hidden on Mobile */}
+          <div className="relative w-full animate-fade-in animation-delay-800 hidden md:block">
             {/* Blue/Pink Blur Effect Behind Dashboard */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-pink-500/20 to-blue-600/20 rounded-2xl blur-3xl scale-110 animate-pulse-slow"></div>
             
@@ -611,72 +611,72 @@ function AppContent() {
         </div>
 
         <div className="container-max relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center px-4">
             {/* Left Content */}
-            <div className="space-y-8 scroll-animate-left">
+            <div className="space-y-6 sm:space-y-8 scroll-animate-left">
               <div className="space-y-4">
-                <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-primary-50 dark:bg-brand-primary-900/20 text-brand-primary-600 dark:text-brand-primary-400 text-sm font-medium">
-                  <Zap className="w-4 h-4 mr-2" />
+                <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-brand-primary-50 dark:bg-brand-primary-900/20 text-brand-primary-600 dark:text-brand-primary-400 text-xs sm:text-sm font-medium">
+                  <Zap className="w-3 sm:w-4 h-3 sm:h-4 mr-2" />
                   {t.hero.subtitle}
                 </div>
-                <h1 className="text-5xl lg:text-7xl font-display font-bold hero-title text-balance">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold hero-title text-balance">
                   {t.hero.title}
                 </h1>
-                <p className="text-xl text-brand-neutral-600 dark:text-brand-neutral-300 leading-relaxed max-w-2xl">
+                <p className="text-base sm:text-lg lg:text-xl text-brand-neutral-600 dark:text-brand-neutral-300 leading-relaxed max-w-2xl">
                   {t.hero.desc}
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-brand-primary-600 text-white hover:bg-brand-primary-700 h-12 px-8 text-lg group">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <button className="inline-flex items-center justify-center rounded-md text-sm sm:text-base lg:text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-brand-primary-600 text-white hover:bg-brand-primary-700 h-11 sm:h-12 px-6 sm:px-8 group">
                   {t.hero.start}
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input bg-background hover:bg-accent hover:text-accent-foreground h-12 px-8 text-lg group">
-                  <Play className="mr-2 w-5 h-5" />
+                <button className="inline-flex items-center justify-center rounded-md text-sm sm:text-base lg:text-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 sm:h-12 px-6 sm:px-8 group">
+                  <Play className="mr-2 w-4 sm:w-5 h-4 sm:h-5" />
                   {t.hero.schedule}
                 </button>
               </div>
 
-              <div className="flex items-center space-x-6 text-sm text-brand-neutral-500 dark:text-brand-neutral-400">
+              <div className="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-brand-neutral-500 dark:text-brand-neutral-400">
                 <div className="flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
+                  <CheckCircle className="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2" />
                   {t.hero.trusted}
                 </div>
               </div>
             </div>
 
             {/* Right Content - Minimalistic Dashboard Preview */}
-            <div className="relative scroll-animate-right">
+            <div className="relative scroll-animate-right px-4 lg:px-0">
               <div className="relative">
                 {/* Main Dashboard */}
-                <div className="bg-white dark:bg-brand-neutral-900 rounded-2xl shadow-medium p-8 transform rotate-1 hover:rotate-0 transition-transform duration-500 border border-brand-neutral-200 dark:border-brand-neutral-700">
-                  <div className="space-y-6">
+                <div className="bg-white dark:bg-brand-neutral-900 rounded-xl sm:rounded-2xl shadow-medium p-4 sm:p-6 lg:p-8 transform rotate-1 hover:rotate-0 transition-transform duration-500 border border-brand-neutral-200 dark:border-brand-neutral-700">
+                  <div className="space-y-4 sm:space-y-6">
                     {/* Clean Header */}
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-10 h-10 bg-brand-neutral-900 dark:bg-white rounded-lg flex items-center justify-center">
-                          <BarChart3 className="w-5 h-5 text-white dark:text-brand-neutral-900" />
+                      <div className="flex items-center space-x-3 sm:space-x-4">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-brand-neutral-900 dark:bg-white rounded-lg flex items-center justify-center">
+                          <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 text-white dark:text-brand-neutral-900" />
                         </div>
                         <div>
-                          <div className="text-lg font-semibold text-brand-neutral-900 dark:text-white">Dashboard</div>
-                          <div className="text-sm text-brand-neutral-500 dark:text-brand-neutral-400">Vue d'ensemble</div>
+                          <div className="text-base sm:text-lg font-semibold text-brand-neutral-900 dark:text-white">Dashboard</div>
+                          <div className="text-xs sm:text-sm text-brand-neutral-500 dark:text-brand-neutral-400">Vue d'ensemble</div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span className="text-xs text-brand-neutral-600 dark:text-brand-neutral-300">En ligne</span>
+                        <span className="text-xs text-brand-neutral-600 dark:text-brand-neutral-300 hidden sm:inline">En ligne</span>
                       </div>
                     </div>
 
                     {/* Clean KPI Cards */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-brand-neutral-50 dark:bg-brand-neutral-800 rounded-xl p-5 border border-brand-neutral-200 dark:border-brand-neutral-700">
-                        <div className="flex items-center justify-between mb-3">
-                          <TrendingUp className="w-5 h-5 text-brand-neutral-600 dark:text-brand-neutral-400" />
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                      <div className="bg-brand-neutral-50 dark:bg-brand-neutral-800 rounded-lg sm:rounded-xl p-3 sm:p-5 border border-brand-neutral-200 dark:border-brand-neutral-700">
+                        <div className="flex items-center justify-between mb-2 sm:mb-3">
+                          <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-brand-neutral-600 dark:text-brand-neutral-400" />
                           <div className="text-xs text-green-600 font-medium">+12.5%</div>
                         </div>
-                        <div className="text-2xl font-bold text-brand-neutral-900 dark:text-white mb-1">
+                        <div className="text-lg sm:text-2xl font-bold text-brand-neutral-900 dark:text-white mb-1">
                           <AnimatedNumber 
                             end={2847500} 
                             prefix="€" 
@@ -851,12 +851,12 @@ function AppContent() {
           <div className="absolute top-1/6 left-1/2 w-48 h-48 bg-indigo-500/6 rounded-full blur-3xl animate-pulse-slow animation-delay-800"></div>
           <div className="absolute bottom-1/6 right-1/6 w-56 h-56 bg-rose-500/6 rounded-full blur-3xl animate-pulse-slow animation-delay-1000"></div>
         </div>
-        <div className="container-max">
-          <div className="text-center mb-16 scroll-animate">
-            <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4 title-spacing text-balance">
+        <div className="container-max px-4">
+          <div className="text-center mb-12 sm:mb-16 scroll-animate">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4 title-spacing text-balance">
               {t.modules.title}
             </h2>
-            <p className="text-xl text-brand-neutral-600 dark:text-brand-neutral-300 max-w-3xl mx-auto mb-8">
+            <p className="text-base sm:text-lg lg:text-xl text-brand-neutral-600 dark:text-brand-neutral-300 max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
               {t.modules.subtitle}
             </p>
             <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
@@ -865,13 +865,13 @@ function AppContent() {
             </button>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {modules.map((module, index) => (
-              <div key={index} className={`bg-white dark:bg-brand-neutral-800 rounded-xl p-6 group cursor-pointer border border-brand-neutral-200 dark:border-brand-neutral-700 hover:shadow-md transition-all duration-300 scroll-animate stagger-${(index % 8) + 1}`}>
-                <div className={`w-14 h-14 bg-brand-neutral-100 dark:bg-brand-neutral-700 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 border border-brand-neutral-200 dark:border-brand-neutral-600`}>
-                  <module.icon className="w-7 h-7 text-brand-neutral-700 dark:text-brand-neutral-300" />
+              <div key={index} className={`bg-white dark:bg-brand-neutral-800 rounded-xl p-5 sm:p-6 group cursor-pointer border border-brand-neutral-200 dark:border-brand-neutral-700 hover:shadow-md transition-all duration-300 scroll-animate stagger-${(index % 8) + 1}`}>
+                <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-brand-neutral-100 dark:bg-brand-neutral-700 rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 border border-brand-neutral-200 dark:border-brand-neutral-600`}>
+                  <module.icon className="w-6 h-6 sm:w-7 sm:h-7 text-brand-neutral-700 dark:text-brand-neutral-300" />
                 </div>
-                <h3 className="text-lg font-semibold text-brand-neutral-900 dark:text-white mb-2 group-hover:text-brand-primary-600 dark:group-hover:text-brand-primary-400 transition-colors">
+                <h3 className="text-base sm:text-lg font-semibold text-brand-neutral-900 dark:text-white mb-2 group-hover:text-brand-primary-600 dark:group-hover:text-brand-primary-400 transition-colors">
                   {module.name}
                 </h3>
                 <p className="text-sm text-brand-neutral-600 dark:text-brand-neutral-300 leading-relaxed">
@@ -885,17 +885,17 @@ function AppContent() {
 
       {/* Features Section */}
       <section id="features" className="section-padding bg-white dark:bg-brand-neutral-900">
-        <div className="container-max">
-          <div className="text-center mb-16 scroll-animate">
-            <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4 text-balance">
+        <div className="container-max px-4">
+          <div className="text-center mb-12 sm:mb-16 scroll-animate">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4 text-balance">
               {t.features.title}
             </h2>
-            <p className="text-xl text-brand-neutral-600 dark:text-brand-neutral-300 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-brand-neutral-600 dark:text-brand-neutral-300 max-w-3xl mx-auto px-4">
               {t.features.subtitle}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
                 icon: Lightbulb,
@@ -1048,12 +1048,12 @@ function AppContent() {
 
       {/* Integrations Section - Creative Vertical Animation */}
       <section id="integrations" className="section-padding bg-white dark:bg-brand-neutral-900 relative overflow-hidden">
-        <div className="container-max">
-          <div className="text-center mb-16 scroll-animate">
-            <h2 className="text-4xl lg:text-5xl font-display font-bold mb-4 text-balance">
+        <div className="container-max px-4">
+          <div className="text-center mb-12 sm:mb-16 scroll-animate">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mb-4 text-balance">
               {t.integrations.title}
             </h2>
-            <p className="text-xl text-brand-neutral-600 dark:text-brand-neutral-300 max-w-3xl mx-auto mb-8">
+            <p className="text-base sm:text-lg lg:text-xl text-brand-neutral-600 dark:text-brand-neutral-300 max-w-3xl mx-auto mb-6 sm:mb-8 px-4">
               {t.integrations.subtitle}
             </p>
             <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
@@ -1064,10 +1064,10 @@ function AppContent() {
 
           {/* Modern Grid Layout */}
           <div className="relative">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
               {integrations.map((integration, index) => (
                   <div key={index} className={`group scroll-animate-scale stagger-${(index % 8) + 1}`}>
-                  <div className="w-full h-24 bg-white dark:bg-brand-neutral-800 rounded-2xl flex items-center justify-center p-4 shadow-sm border border-brand-neutral-200 dark:border-brand-neutral-700 hover:shadow-lg hover:border-brand-neutral-300 dark:hover:border-brand-neutral-600 transition-all duration-300 hover:scale-105 relative overflow-hidden">
+                  <div className="w-full h-20 sm:h-24 bg-white dark:bg-brand-neutral-800 rounded-xl sm:rounded-2xl flex items-center justify-center p-3 sm:p-4 shadow-sm border border-brand-neutral-200 dark:border-brand-neutral-700 hover:shadow-lg hover:border-brand-neutral-300 dark:hover:border-brand-neutral-600 transition-all duration-300 hover:scale-105 relative overflow-hidden">
                       {/* Subtle background animation */}
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-primary-500/5 to-brand-secondary-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <img 
@@ -1190,8 +1190,8 @@ function AppContent() {
 
       {/* Footer */}
       <footer className="bg-brand-neutral-900 text-brand-neutral-300 py-16">
-        <div className="container-max">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="container-max px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Brand */}
             <div className="lg:col-span-1">
               <div className="flex items-center mb-6">
